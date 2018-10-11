@@ -57,3 +57,35 @@ Check that it augments the `request.body` with the required inforation.
 * TDD Wunderground middleware **3pts**
 * Stop Testing and API **5pts**
 
+
+goes from index.js Through app.js Through tours.js 
+
+post /  ---tour 
+get /   ---list tour 
+get /:id 
+Post /:id/stops  -- pushes a stop to a tour...app.post('/api/tours/stops/getlocation.)(req,res)...post should only take zip codes as an object { zipcode: 97209}
+Get /:id/stops 
+
+
+only apply middleware on 'getlocation' in the url
+const { zip}
+
+have file util/'location'.js
+const getLocationWeather = require('weatherServiceInfo'), place it into util file (weather service )
+
+inside of util folder we will have middle ware...module.exports = (req, res, next)
+getLocationinfo(zipcode)
+-then(locationInfo => {
+    req.locationresults = locationinfo
+    next()
+})
+
+begin with unit testing 
+make sure middleware works 
+
+location js.
+created location, test js
+then move onto routes.
+
+{$push: 
+stops: actual stop } (post)
