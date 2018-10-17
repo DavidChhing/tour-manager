@@ -44,7 +44,19 @@ describe('tours end to end test', () => {
     });
 
     
-
+    it('creates a tour', () => {
+        
+        const data = {
+            title: chance.string(),
+            activities: [chance.string(), chance.string()],
+            launchDate: chance.date()
+        };
+        
+        return request(app)
+            .post('/api/tours')
+            .send(data)
+            .then(({ body }) => expect(body.title).toEqual(data.title));
+    });
 
 
 
