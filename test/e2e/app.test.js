@@ -43,7 +43,6 @@ describe('tours end to end test', () => {
             .then(tourRes => createdTours = tourRes);
     });
 
-    
     it('creates a tour', () => {
         
         const data = {
@@ -67,6 +66,16 @@ describe('tours end to end test', () => {
                 });
             });
     });  
+
+    it('gets a tour by id', () => {
+        return request(app)
+            .get(`/api/tours/${createdTours[0]._id}`)
+            .then(res => {
+                expect(res.body).toEqual({ ...createdTours[0] });
+            });
+    });
+
+
 
 
 });
