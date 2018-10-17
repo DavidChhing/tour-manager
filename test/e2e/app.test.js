@@ -58,6 +58,15 @@ describe('tours end to end test', () => {
             .then(({ body }) => expect(body.title).toEqual(data.title));
     });
 
+    it('gets all tours', () => {
+        return request(app)
+            .get('/api/tours')
+            .then(retrievedTours => {
+                createdTours.forEach(createdTour => {
+                    expect(retrievedTours.body).toContainEqual(createdTour);
+                });
+            });
+    });  
 
 
 });
