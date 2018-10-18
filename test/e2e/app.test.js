@@ -94,17 +94,29 @@ describe('tours end to end test', () => {
             .then(({ body }) => {
                 const tourId = body._id;
                 const stopId = body.stops[0]._id; 
-                console.log(body);
-                console.log(tourId);
-                console.log(stopId, 'hi !!!!!! hii');
                 return request(app)
                     .delete(`/api/tours/${tourId}/stops/${stopId}`)
                     .then((response) => {
                         expect(response.body.stops).toEqual([]);
-                    });
-                
+                    }); 
             });
-        
     });
 
+    it('updates a stop with number of attendants', () => {
+        const stop = { zip: 97124 };
+        return request(app)
+            .post(`/api/tours/${createdTours[1]._id}/stops`)
+            .send(stop)
+            .then(({ body }) => {
+                const tourId = body._id;
+                const stopId = body.stops[0]._id; 
+                const riders = { attendance: 50 };
+                return request(app)
+                    .put(`/api/tours/${tourId}/stops/${stopId}/attendance`)
+                    .send(riders)
+                    .then(({ body }) => {
+                        expect(body.stops[0].attendance).toEqual(riders.attendance);
+                    });
+            });
+    });
 });
