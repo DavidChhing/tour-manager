@@ -14,14 +14,11 @@ describe('Weather middleware test', () => {
 
             expect(called).toBeTruthy();
             expect(error).toBeFalsy();
-
-
             expect(req.stop).toEqual({ location: expect.any(Object), weather: expect.any(Object) });
             done();
         };
         createWeather()(req, null, next);
     });
-
 
     it('returns an error if an invalid zipcode is supplied', done => {
         const req = {

@@ -11,17 +11,17 @@ describe('tours end to end test', () => {
         {
             title: 'Rolly Roos',
             activities: ['bar hopping', 'playing tag'],
-            launchDate: chance.date()
+            launchDate: chance.date(),
         },
         {
             title: 'Round n Round',
             activities: ['Monkey Watching', 'Walnut picking'],
-            launchDate: chance.date()
+            launchDate: chance.date(),
         },
         {
             title: 'Conduit Run',
             activities: ['Baking classes', 'Tree climbing'],
-            launchDate: chance.date()
+            launchDate: chance.date(),
         },
     ];    
 
@@ -48,7 +48,8 @@ describe('tours end to end test', () => {
         const data = {
             title: chance.string(),
             activities: [chance.string(), chance.string()],
-            launchDate: chance.date()
+            launchDate: chance.date(),
+            stops: []
         };
         
         return request(app)
@@ -76,11 +77,17 @@ describe('tours end to end test', () => {
     });
 
     it('adds a stop to a tour', () => {
-        const stop = { zip: '97124' };
+        const stop = { zip: 97124 };
         return request(app)
-            .post(`api/tours/${createdTours[0]._id}/stops`)
+            .post(`/api/tours/${createdTours[1]._id}/stops`)
             .send(stop)
-            .then(({ body }) => expect(body.stops[1].location.zip).toEqual(stop.zip));
+            .then(({ body }) => {
+                expect(body.stops[0].location.zip).toEqual(stop.zip);
+            });
     });
+
+
+
+
 
 });
