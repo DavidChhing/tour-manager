@@ -78,7 +78,7 @@ describe('tours end to end test', () => {
     it('adds a stop to a tour', () => {
         const stop = { zip: '97124' };
         return request(app)
-            .post(`api/tours/${createdTours[1]._id}/stops`)
+            .post(`api/tours/${createdTours[0]._id}/stops`)
             .send(stop)
             .then(({ body }) => expect(body.stops[1].location.zip).toEqual(stop.zip));
     });
