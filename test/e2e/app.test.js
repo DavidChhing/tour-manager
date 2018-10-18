@@ -86,8 +86,25 @@ describe('tours end to end test', () => {
             });
     });
 
-
-
-
+    it('removes a stop with tourId and stopId', () => {
+        const stop = { zip: 97124 };
+        return request(app)
+            .post(`/api/tours/${createdTours[1]._id}/stops`)
+            .send(stop)
+            .then(({ body }) => {
+                const tourId = body._id;
+                const stopId = body.stops[0]._id; 
+                console.log(body);
+                console.log(tourId);
+                console.log(stopId, 'hi !!!!!! hii');
+                return request(app)
+                    .delete(`/api/tours/${tourId}/stops/${stopId}`)
+                    .then((response) => {
+                        expect(response.body.stops).toEqual([]);
+                    });
+                
+            });
+        
+    });
 
 });
